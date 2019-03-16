@@ -2,6 +2,7 @@
   <div id="app">
     <top></top>
     <sidebar></sidebar>
+    <playBarLong id="playBarLong"></playBarLong>
   </div>
 </template>
 
@@ -9,12 +10,14 @@
 
 import top from "./components/common/top.vue"
 import sidebar from "./components/common/sidebar.vue"
+import playBarLong from "./views/playBarLong"
 
 export default {
   name: 'app',
   components: {
     top,
     sidebar,
+    playBarLong,
   }
 }
 </script>
@@ -26,6 +29,9 @@ export default {
 }
 
 #app {
+  position: relative;
+  width: 100%;
+  height: 920px;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -33,13 +39,17 @@ export default {
 }
 
 html {
-  width: 1400px;
-  height: 920px;
-  border: 1px solid red;
-  
-  margin-left: 100px;
-  margin-top: 100px;
+  /* width: 1400px;
+  height: 920px; */
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid red; */
+  /* margin-left: 100px;
+  margin-top: 100px; */
 }
-
+#playBarLong {
+  position: absolute;
+  bottom: 0px;  
+}
 
 </style>

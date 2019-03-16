@@ -31,13 +31,20 @@
                 <span class="musicLIstItem">延时拍摄的BGM</span>
             </div>
         </div>
+        <playBar id="playBar"></playBar>
     </div>
   </div>
 </template>
 
 <script>
+
+import playBar from "./playBar"
+
 export default {
   name: "sidebar",
+  components: {
+      playBar,
+  },
   data() {
     return {
         userName: 'elperli',
@@ -48,12 +55,16 @@ export default {
 </script>
 
 <style scoped>
-
+* {
+    outline: none
+}
 #sidebar {
+  position: relative;
   width: 200px;
-  height: 870px;
+  height: 820px;
   border: 1px solid red;
-  border-left: none
+  border-left: none;
+  box-sizing: border-box
 
 }
 .avatar {
@@ -82,22 +93,23 @@ export default {
     margin-left: calc(50% - 70px);
 }
 .personalFm {
-    background: linear-gradient(left top,#43CBFF,#9708CC)
+    background: linear-gradient(to left top,#43CBFF,#9708CC)
 }
 .myMusic {
-    background: linear-gradient(left top,#F97794,#623AA2)
+    background: linear-gradient(to left top,#F97794,#623AA2)
 }
 .mv {
-    background: linear-gradient(left top,#A0FE65,#FA016D)
+    background: linear-gradient(to left top,#A0FE65,#FA016D)
 }
 .friends {
-    background: linear-gradient(left top,#FFF3B0,#9708CC)
+    background: linear-gradient(to left top,#FFF3B0,#9708CC)
 }
 .createdMusicList {
     width: 100%;
     height: auto;
     border: 1px solid red;
-    border-left: none
+    border-left: none;
+    margin-top: 2px;
 
 }
 .createdMusicList span {
@@ -127,16 +139,23 @@ export default {
     background: linear-gradient(left, #81FFEF, #F067B4)
 }
 .musicList {
-    padding-top:3px;
-    padding-left: 20px;
-    padding-bottom: 3px;
+    padding:3px 0px 3px 20px;
 }
 .musicList span {
     color: #241B1B;
-}jm,
-    float: left;
-    margin-top: 1px;
+    vertical-align: bottom;
 }
-
+.musicList img {
+    /* margin-top: 1px; */
+     vertical-align: bottom;
+    
+}
+ 
+#playBar {
+    position: absolute;
+    bottom: 0px;
+    outline: none;
+    box-sizing: border-box
+}
 
 </style>

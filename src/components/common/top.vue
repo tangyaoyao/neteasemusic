@@ -1,6 +1,5 @@
 <template>
     <div id="c_topbar">
-
         <div class="iconAndName">
             <img src="../../assets/netEaseIcon.png" alt="" >
             <img src="../../assets/netEaseName.png" alt="" height="32">
@@ -36,16 +35,24 @@ export default {
         return {
 
         }
+    },
+    methods: {
+        quitApp() {
+
+        }
     }
 }
 </script>
 
 
 <style scoped>
+
     #c_topbar {
         width: 100%;
         height: 50px;
         background: rgb(198,47,47);
+        margin: 0px;
+        padding: 0px;
     }
     .iconAndName {
         float: left;

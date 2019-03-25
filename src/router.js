@@ -1,16 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import App from './App.vue'
+import Login from "./components/common/logninAndOut/login.vue"
+import Home from "./components/common/home.vue"
+import PhoneLogin from "./components/common/logninAndOut/phoneLogin.vue"
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'appLink',
-      component: App
+    {path:'*', redirect:'/'},
+    { path: '/',name: 'home',component: Home },
+    { path:'/login', name:'login', component:Login,
+      // children:[{
+      //   path: '/login/phoneLogin', name: 'phoneLogin', component: PhoneLogin
+      // }]
     },
+    { path: '/login/phoneLogin', name: 'phoneLogin', component: PhoneLogin}
     // {
     //   path: '/about',
     //   name: 'about',

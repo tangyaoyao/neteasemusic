@@ -5,6 +5,7 @@ import {
   createProtocol,
   installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib'
+import { SSL_OP_TLS_ROLLBACK_BUG } from 'constants';
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -21,13 +22,18 @@ function createWindow () {
     height: 920,
     frame:false,
     maximizable:false,
-    title:'netease'
+    title:'netease',
+    // transparent:true,
+    backgroundColor:'#fff',
+    show:false
   })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
-    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
-    if (!process.env.IS_TEST) win.webContents.openDevTools()
+    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL + '/#/home')
+    if (!process.env.IS_TEST) {
+      // win.webContents.openDevTools()
+    }
   } else {
     createProtocol('app')
     // Load the index.html when not in development
@@ -36,6 +42,9 @@ function createWindow () {
 
   win.on('closed', () => {
     win = null
+  })
+  win.once('ready-to-show', () => {
+    win.show()
   })
 }
 
@@ -92,7 +101,11 @@ if (isDevelopment) {
 app.on('ready',() => {
   // 注册Alt+Z为f12系统开发者工具
   const f12 = globalShortcut.register('Alt+Z', () => {
-    win.webContents.openDevTools()
-    console.log("f12");
+    BrowserWindow.getFocusedWindow().webContents.openDevTools()
+    // for (let i in BrowserWindow.getFocusedWindow()) {
+    //   console.log(i);
+    // }
+
+    console.log("f12-----" + BrowserWindow.getFocusedWindow().webContents);
   })
 })

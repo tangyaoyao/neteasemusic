@@ -3,7 +3,8 @@
         <!--  播放，开始，暂停按钮 -->
         <div class="playButton">
             <img src="../assets/playbar/music_rewind_button.svg" alt="">
-            <img src="../assets/playbar/music_play_button.svg" alt="">
+            <img @click="playOrPauseMusic" v-show="musicPaused" id="plauButton" src="../assets/playbar/music_play_button.svg" alt="">
+            <img @click="playOrPauseMusic" v-show="!musicPaused" id="pauseButton" src="../assets/playbar/music_pause_button.svg" alt="">
             <img src="../assets/playbar/music_fastforward_button.svg" alt="">
         </div>
         <!-- 播放条 -->
@@ -25,11 +26,14 @@
                 <img src="../assets/playbar/单曲循环.svg" alt="">
             </div>
             <div class="musicList">
-                
+                <img src="../assets/playbar/play-list.svg" alt="">
+                <div class="showMusicListCount">{{musicListCount}}</div>
             </div>
-
         </div>
+        
+        <audio ref="audio" src="https://m10.music.126.net/20190316212417/d284d2ff8b7d39af916eadcf96825bb4/ymusic/dabb/573c/bd57/fa893d8702ba202b0ac15d9aa61aab83.mp3" style="dispaly:none"></audio>
     </div>
+     
 </template>
 
 <script>
@@ -37,7 +41,26 @@ export default {
     name: 'playBarLong',
     data() {
         return {
+            // 歌曲当前播放进度
             playbackProgress: '00:00',
+            // 当前歌单歌曲数量
+            musicListCount:'50',
+            // 判定歌曲是否正在播放
+            musicPaused:true
+
+        }
+    },
+    methods: {
+        playOrPauseMusic() {
+            if(this.$refs.audio) {
+                if(this.$refs.audio.paused) {
+                    this.musicPaused=false
+                    this.$refs.audio.play()
+                }else {
+                     this.musicPaused=true
+                    this.$refs.audio.pause()                    
+                }
+            }
 
         }
     }
@@ -65,7 +88,6 @@ export default {
         justify-content: space-around;
         align-items: center;
     }
-   
     .progressBarContainer {
         display: flex ;
         justify-content: space-around ;
@@ -101,5 +123,17 @@ export default {
         width: 100px;
         height: 4px;
         border: 1px solid red;
+    }
+    .musicList img {
+        float: left;
+    }
+    .showMusicListCount {
+        float: right;
+        height: 16px;
+        padding: 0px 6px;
+        border-radius: 0px 6px 6px 0px;
+        font-size: 8px;
+        line-height: 16px;
+        background: rgb(225, 225, 226)
     }
 </style>
